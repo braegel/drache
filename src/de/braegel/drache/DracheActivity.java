@@ -12,12 +12,12 @@ public class DracheActivity extends Activity {
 	   public void onCreate(Bundle savedInstanceState) {
 		   super.onCreate(savedInstanceState);
 	       TextView tv = new TextView(this);
-	       final String TAG = "drache.onCreate";	       
-	       Log.d(TAG,"testlog");
+//	       final String TAG = "drache.onCreate";
+//	       Log.d(TAG,"testlog");
 	       boolean[] sequence = {true};     
 	       //	       1: left 0: right
 	       sequence[0]=true;
-	       int iteration, iterations = 3;
+	       int iteration, iterations = 1;
 	       
 	       boolean[] sequence_new = iterate(sequence);
 	       
@@ -30,8 +30,10 @@ public class DracheActivity extends Activity {
 	       
 	       setContentView(tv);
 	   }
-	   private boolean[] iterate(boolean[] sequence) {
-	       final String TAG = "drache.iterate";	       
+	   public boolean[] iterate(boolean[] sequence) {
+	       final String TAG = "drache.iterate";
+	       Log.d(TAG+" sequence",sequence_to_string(sequence));
+
 	       int position;
 
 		   // iterate
@@ -51,13 +53,16 @@ public class DracheActivity extends Activity {
 	       sequence_new[sequence.length]=true;
 	       
 	       // create back half of new array by xor mirroring first half
-	       for(position=sequence.length-1;position < 0;position=position-1) {
-	    	   Log.d(TAG,Integer.toString(position)+":"+Boolean.toString(sequence[position]));
+	       Log.d(TAG+" start position",Integer.toString(sequence.length-1));
+	       for(position=sequence.length-2;position >= 0;position=position-1) {
+	    	   Log.d(TAG+" get",Integer.toString(position)+":"+Boolean.toString(sequence[position]));
 	    	   if (sequence[position] == true){
 	    		   sequence_new[sequence.length-position+sequence.length-1] = false;
+		    	   Log.d(TAG+" set",Integer.toString(sequence.length-position+sequence.length-1)+":false");
 	    	   }
 	    	   else{
 	    		   sequence_new[sequence.length-position+sequence.length-1] = true;
+		    	   Log.d(TAG+" set",Integer.toString(sequence.length-position+sequence.length-1)+":true");
 	    	   }
 	    		   
 	       }
