@@ -2,7 +2,7 @@ package de.braegel.drache;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.widget.TextView;
 
 
@@ -17,7 +17,7 @@ public class DracheActivity extends Activity {
 	       boolean[] sequence = {true};     
 	       //	       1: left 0: right
 	       sequence[0]=true;
-	       int iteration, iterations = 1;
+	       int iteration, iterations = 8;
 	       
 	       boolean[] sequence_new = iterate(sequence);
 	       
@@ -31,8 +31,8 @@ public class DracheActivity extends Activity {
 	       setContentView(tv);
 	   }
 	   public boolean[] iterate(boolean[] sequence) {
-	       final String TAG = "drache.iterate";
-	       Log.d(TAG+" sequence",sequence_to_string(sequence));
+//	       final String TAG = "drache.iterate";
+//	       Log.d(TAG+" iterating sequence",sequence_to_string(sequence));
 
 	       int position;
 
@@ -51,24 +51,25 @@ public class DracheActivity extends Activity {
 	       
 	       // add a "true"
 	       sequence_new[sequence.length]=true;
-	       
+//	       Log.d(TAG+" after adding a true",sequence_to_string(sequence_new));
+
 	       // create back half of new array by xor mirroring first half
-	       Log.d(TAG+" start position",Integer.toString(sequence.length-1));
-	       for(position=sequence.length-2;position >= 0;position=position-1) {
-	    	   Log.d(TAG+" get",Integer.toString(position)+":"+Boolean.toString(sequence[position]));
+	       for(position=sequence.length-1;position >= 0;position=position-1) {
+//	    	   Log.d(TAG+" get",Integer.toString(position)+":"+Boolean.toString(sequence[position]));
 	    	   if (sequence[position] == true){
-	    		   sequence_new[sequence.length-position+sequence.length-1] = false;
-		    	   Log.d(TAG+" set",Integer.toString(sequence.length-position+sequence.length-1)+":false");
+	    		   sequence_new[sequence.length-position+sequence.length] = false;
+//		    	   Log.d(TAG+" set",Integer.toString(sequence.length-position+sequence.length)+":false");
+//			       Log.d(TAG+" sequence_new",sequence_to_string(sequence_new));
 	    	   }
 	    	   else{
-	    		   sequence_new[sequence.length-position+sequence.length-1] = true;
-		    	   Log.d(TAG+" set",Integer.toString(sequence.length-position+sequence.length-1)+":true");
+	    		   sequence_new[sequence.length-position+sequence.length] = true;
+//		    	   Log.d(TAG+" set",Integer.toString(sequence.length-position+sequence.length)+":true");
+//			       Log.d(TAG+" sequence_new",sequence_to_string(sequence_new));
 	    	   }
 	    		   
 	       }
     	   return sequence_new;
 
-	
 	}
 	private String sequence_to_string(boolean[] sequence_in){
 	   String sequence ="";
